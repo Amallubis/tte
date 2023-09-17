@@ -1,0 +1,45 @@
+{% extends "backend/master.html" %}
+
+
+{% block dashboard %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>Nama</th>
+                        <th>NIP</th>
+                        <th>NIK</th>
+                        <th>Email</th>
+                        <th>Dinas</th>
+                        <th>No WA</th>
+                        <th>Keluhan</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for l  in listpengaduan  %}
+                    <tr>
+                        <th>{{l.publish}}</th>
+                        <th>{{l.nama}}</th>
+                        <th>{{l.nip}}</th>
+                        <th>{{l.nik}}</th>
+                        <th>{{l.email}}</th>
+                        <th>{{l.dinas}}</th>
+                        <th>{{l.nohp}}</th>
+                        <th>{{l.keluhan}}</th>
+                        <th>
+                            <a href="https://api.whatsapp.com/send?phone={{l.nohp}}"><i class="bi bi-whatsapp fs-4"></i></a>
+                        </th>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+  
+{% endblock dashboard %}
