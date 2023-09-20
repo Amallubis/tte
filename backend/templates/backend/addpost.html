@@ -1,0 +1,36 @@
+{% extends "backend/master.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block dashboard %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            {% for message in messages %}
+                {% if message %}
+                    <div class="alert alert-success">{{message}}</div>
+                {% endif %}
+            {% endfor %}
+            <form action="{% url 'addpost' %}" enctype="multipart/form-data" method="post">
+                {% csrf_token %}
+                <input class="form-control form-control-lg" type="text" name="judul" placeholder=".form-control-lg" aria-label=".form-control-lg example">
+              
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Posting</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" name="posting" rows="3"></textarea>
+                </div>
+
+                  <div class="mb-3">
+                    <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+                    <input class="form-control" type="file" name="images" id="formFileMultiple" multiple>
+                </div>
+                <button type="submit" class="btn btn-primary">Posting</button>
+            </form>
+            {% for img in images %}
+                <img src="{{img.fotos.url}}" alt="" srcset="" style="height: 200px; width:200px">
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+{% endblock dashboard %}
