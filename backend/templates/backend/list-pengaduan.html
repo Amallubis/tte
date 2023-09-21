@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-bordered">
+            <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>Tanggal</th>
@@ -22,18 +22,39 @@
                 <tbody>
                     {% for l  in listpengaduan  %}
                     <tr>
-                        <th>{{l.publish}}</th>
-                        <th>{{l.nama}}</th>
-                        <th>{{l.nip}}</th>
-                        <th>{{l.nik}}</th>
-                        <th>{{l.email}}</th>
-                        <th>{{l.dinas}}</th>
-                        <th>{{l.nohp}}</th>
-                        <th>{{l.keluhan}}</th>
-                        <th>
-                            <a href="https://api.whatsapp.com/send?phone={{l.nohp}}"><i class="bi bi-whatsapp fs-4"></i></a>
-                        </th>
+                        <td>{{l.publish}}</td>
+                        <td>{{l.nama}}</td>
+                        <td>{{l.nip}}</td>
+                        <td>{{l.nik}}</td>
+                        <td>{{l.email}}</td>
+                        <td>{{l.dinas}}</td>
+                        <td>{{l.nohp}}</td>
+                        <td>{{l.keluhan}}</td>
+                        <td>
+                            <a href="https://api.whatsapp.com/send?phone={{l.nohp}}"><i class="bi bi-whatsapp fs-4" style="color: green;"></i></a>
+                            <a href="#"><i class="bi bi-hammer fs-4"></i></a>
+                            <a href="#"><i class="bi bi-trash fs-4" style="color:red" data-bs-toggle="modal" data-bs-target="#exampleModal-{{l.id}}"></i></a>
+                                <!-- Button trigger modal -->
+                        </td>
                     </tr>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal-{{l.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Hapus</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Apakah anda yakin menghapus <strong>{{l.nama | upper}}</strong>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a class="btn btn-danger" href="{% url 'hapus-pengaduan' l.id %}">Hapus</a>
+            </div>
+        </div>
+    </div>
+</div>
                     {% endfor %}
                 </tbody>
 
